@@ -15,8 +15,7 @@ try:
 except:
     print(f"File cannot be opened: {fName}")
     exit()
-
-
+    
 totalConfidence = 0
 counter = 0
 for line in fhandle:
@@ -24,10 +23,7 @@ for line in fhandle:
         counter +=1
         confidence = float(line.split()[1])
         totalConfidence += confidence
-
-
-
-
+        
 if count != 0:
     print(f"Average spam confidence: {totalConfidence / counter}")
 else:
