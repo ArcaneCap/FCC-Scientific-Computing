@@ -16,19 +16,20 @@ except:
     print(f"File cannot be opened: {fName}")
     exit()
 
-count = 0
-total = 0
 
-for i in fhand:
-    if i.find('X-DSPAM-Confidence') == -1:
-        continue
-    confidence = float(i.split()[1])
-    count += 1
-    total += confidence
+totalConfidence = 0
+counter = 0
+for line in fhandle:
+    if line.startswith('X-DSPAM-Confidence:'):
+        counter +=1
+        confidence = float(line.split()[1])
+        totalConfidence += confidence
+
+
+
 
 if count != 0:
-    average = total / count
-    print("Average confidence:", average)
+    print(f"Average spam confidence: {totalConfidence / counter}")
 else:
     print("No 'X-DSPAM-Confidence' lines found in the file.")
 
