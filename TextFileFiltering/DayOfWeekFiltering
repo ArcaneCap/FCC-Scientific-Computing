@@ -1,0 +1,26 @@
+import string
+
+fname = input("Enter a file name > ")
+try:
+    fhandle = open(fname)
+except FileNotFoundError:
+    print(f"File cannot be opened: {fname}")
+    exit()
+
+counts = {}
+
+for line in fhandle:
+    if not line.startswith('From'):
+        continue
+    line = line.strip().lower()
+    line = line.translate(line.maketrans("", "", string.punctuation))
+    words = line.split()
+    # print(repr(line))
+    if len(words) > 4:
+        counts[words[2]] = counts.get(words[2], 0) +1
+
+
+if len(counts) > 0:
+    print(counts)
+else:
+    print("No days of the week found")
